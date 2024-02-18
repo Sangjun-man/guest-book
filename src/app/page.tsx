@@ -10,7 +10,7 @@ export default async function Home() {
     });
     return {
       props: { user },
-      revalidate: 10,
+      revalidate: 0,
     };
   };
 
