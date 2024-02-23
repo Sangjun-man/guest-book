@@ -3,12 +3,10 @@ import { Memo } from "@prisma/client";
 import * as style from "./Card.module.css";
 import dayjs from "dayjs";
 import clsx from "clsx";
+import Lottie from "react-lottie-player";
 function Card({ memo }: { memo: Memo }) {
-  const fontColors = [style.blue, style.green, style.orange];
-  const randomColor = fontColors[Math.floor(Math.random() * fontColors.length)];
-
   return (
-    <article className={clsx([style.card, randomColor])}>
+    <article className={clsx([style.card, memo.color.toLowerCase()])}>
       <div>{memo.content}</div>
       <div>
         {memo.nickname}

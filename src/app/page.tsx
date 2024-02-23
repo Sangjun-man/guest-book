@@ -18,13 +18,19 @@ export default async function Home() {
   } = await getMemo();
 
   return (
-    <main>
-      <MemoContainer memos={memos} />
+    <>
+      {memos.length ? (
+        <MemoContainer memos={memos} />
+      ) : (
+        <section className="bg">
+          <div className="img" />
+        </section>
+      )}
       <Bottom>
-        <button>
-          <Link href="/memo">코멘트 남기기 </Link>
-        </button>
+        <Link href="/memo" className="button">
+          코멘트 남기기
+        </Link>
       </Bottom>
-    </main>
+    </>
   );
 }

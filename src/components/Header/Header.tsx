@@ -1,8 +1,9 @@
+import Link from "next/link";
 import * as style from "./Header.module.css";
 function Header() {
   return (
     <header className={style.header}>
-      <div className={style.image}></div>
+      <Link className={style.image} href="/" />
     </header>
   );
 }

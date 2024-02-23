@@ -1,0 +1,40 @@
+.inputSection {
+  height: 100%;
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+  box-sizing: border-box;
+  row-gap: 40px;
+  @media (max-width: 1247px) {
+    padding-block: 40px;
+  }
+  @media (min-width: 1248px) {
+    padding-block: 80px;
+  }
+}
+.inputSection::-webkit-scrollbar {
+  display: none;
+}
+
+.inputElem {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  width: calc(100% - 24px);
+}
+
+.inputElem > label {
+  font-family: Pretendard;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: -0.01em;
+  text-align: left;
+  color: rgba(207, 207, 207, 1);
+}
+
+.textArea {
+  min-height: 360px;
+}

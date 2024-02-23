@@ -1,21 +1,22 @@
 .container {
   width: 100%;
-  max-width: 1200px;
   overflow: scroll;
   margin: auto;
-
+  max-width: 1200px;
+  width: 100%;
   display: flex;
+  gap: 30px;
+  box-sizing: border-box;
   @media (max-width: 1247px) {
-    margin-top: calc(var(--headerTop) + 40px);
+    margin-top: 40px;
     flex-direction: column;
+    padding-inline: 24px;
   }
-
   @media (min-width: 1248px) {
-    margin-top: calc(var(--headerTop) + 80px);
+    margin-top: 80px;
     flex-direction: row;
   }
-
-  gap: 30px;
+  padding-bottom: calc(var(--bottomBarHeight) * 1.5);
 }
 
 .splited {
