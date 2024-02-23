@@ -1,0 +1,26 @@
+.container {
+  width: 100%;
+  max-width: 1200px;
+  overflow: scroll;
+  margin: auto;
+
+  display: flex;
+  @media (max-width: 1247px) {
+    margin-top: calc(var(--headerTop) + 40px);
+    flex-direction: column;
+  }
+
+  @media (min-width: 1248px) {
+    margin-top: calc(var(--headerTop) + 80px);
+    flex-direction: row;
+  }
+
+  gap: 30px;
+}
+
+.splited {
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+  gap: 24px;
+}

@@ -8,22 +8,16 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-model Post {
+model Memo {
   id        String  @id @default(cuid())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  authorId  String?
-  author    User?   @relation(fields: [authorId], references: [id])
+  content   String
+  nickname  String
+  created_at DateTime @default(now())
+  color Color
 }
 
-model User {
-  id        String   @id @default(cuid())
-  name      String?
-  email     String?  @unique
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-  posts     Post[]
-
-  @@map("users")
+enum Color {
+  BLUE
+  GREEN
+  ORANGE
 }

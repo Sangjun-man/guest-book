@@ -1,28 +1,30 @@
-import Image from "next/image";
-import styles from "./page.module.css";
 import { PrismaClient } from "@prisma/client";
+import Bottom from "../components/Bottom/Bottom";
+import MemoContainer from "@/components/MemoContainer/MemoContainer";
+import Link from "next/link";
 
 export default async function Home() {
   const prisma = new PrismaClient();
-  const getUser = async () => {
-    const user = await prisma.user.findFirst({
-      where: { name: "이상준" },
-    });
+  const getMemo = async () => {
+    const memos = await prisma.memo.findMany({});
     return {
-      props: { user },
+      props: { memos },
       revalidate: 0,
     };
   };
 
   const {
-    props: { user },
-  } = await getUser();
+    props: { memos },
+  } = await getMemo();
 
   return (
     <main>
-      <div>{user?.name}</div>
-      <div>{user?.email}</div>
-      <div>{user?.updatedAt.toString()}</div>
+      <MemoContainer memos={memos} />
+      <Bottom>
+        <button>
+          <Link href="/memo">코멘트 남기기 </Link>
+        </button>
+      </Bottom>
     </main>
   );
 }
