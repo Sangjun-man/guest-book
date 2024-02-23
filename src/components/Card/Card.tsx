@@ -10,7 +10,7 @@ function Card({ memo }: { memo: Memo }) {
       <div>
         {memo.nickname}
         <br />
-        {dayjs(memo.created_at).format("YY.MM.DD HH:MM")}
+        {dayjs(memo.created_at).format("YY.MM.DD hh:mm")}
       </div>
     </article>
   );

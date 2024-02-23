@@ -1,6 +1,7 @@
 import { Color, Memo } from "@prisma/client";
 import prisma from "@/db/index";
 import { NextRequest, NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
 
 export type RequestData = {
   nickname: Memo["nickname"];
@@ -13,7 +14,6 @@ export async function POST(req: NextRequest) {
   const { nickname, content } = data;
   const fontColors = ["BLUE", "ORANGE", "GREEN"] as Color[];
   const randomColor = fontColors[Math.floor(Math.random() * fontColors.length)];
-  console.log(nickname, data);
   try {
     await prisma.memo.create({
       data: {
@@ -33,8 +33,6 @@ export async function POST(req: NextRequest) {
     message: "성공",
   });
 }
-
-export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest, response: NextResponse) {
   const memos = await prisma.memo.findMany({

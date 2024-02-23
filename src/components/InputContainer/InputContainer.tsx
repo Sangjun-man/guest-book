@@ -9,7 +9,23 @@ export default function InputContainer() {
   const [content, setContent] = useState<string>("");
   const router = useRouter();
   const saveComment = useCallback(
-    async ({ nickname, content }: { nickname: string; content: string }) => {
+    async ({
+      nickname: n,
+      content: c,
+    }: {
+      nickname: string;
+      content: string;
+    }) => {
+      const nickname = n.trim();
+      const content = c.trim();
+
+      if (!nickname) {
+        return alert("공백을 제외한 문자를 닉네임에 입력해주세요!");
+      }
+      if (!content) {
+        return alert("공백을 제이한 문자를 코멘트를 입력해주세요!");
+      }
+
       const response = await fetch("/api/memo", {
         method: "POST",
         body: JSON.stringify({
