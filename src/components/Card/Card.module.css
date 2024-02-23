@@ -2,11 +2,6 @@
   padding: 32px;
   border-radius: 20px;
   border: 1px;
-  gap: 24px;
-  font-family: Pretendard;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 32px;
   letter-spacing: -0.01em;
   text-align: left;
   display: flex;
@@ -14,6 +9,16 @@
   gap: 24px;
   background: linear-gradient(137.99deg, #000000 1.93%, #262626 100%);
   border: 1px solid rgba(38, 38, 38, 1);
-  min-width: 320px;
-  min-height: 280px;
+
+  @media (max-width: 1247px) {
+    font-family: Pretendard;
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  @media (min-width: 1248px) {
+    font-family: Pretendard;
+    font-size: 20px;
+    line-height: 32px;
+  }
 }

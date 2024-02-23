@@ -16,7 +16,7 @@
     margin-top: 80px;
     flex-direction: row;
   }
-  padding-bottom: calc(var(--bottomBarHeight) * 1.5);
+  padding-bottom: calc(var(--bottomBarHeight) * 2);
 }
 
 .splited {
