@@ -3,27 +3,59 @@
 
 import { Memo } from "@prisma/client";
 import style from "./MemoContainer.module.css";
-import { PropsWithChildren, useEffect, useMemo, useState } from "react";
+import {
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import Loader from "../Loader/Loader";
 import Card from "../Card/Card";
 
 interface MemoContainerProps {
   memos: Memo[];
 }
-function MemoContainer({ memos }: PropsWithChildren<MemoContainerProps>) {
+function MemoContainer({
+  memos,
+  ...props
+}: PropsWithChildren<MemoContainerProps>) {
+  const [freshMemo, setFreshMemo] = useState(memos);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const splitedMemo = useMemo(
     () =>
-      memos.reduce<[Memo[], Memo[], Memo[]]>(
+      freshMemo.reduce<[Memo[], Memo[], Memo[]]>(
         (acc, cur, index) => {
           acc[index % 3].push(cur);
           return acc;
         },
         [[], [], []]
       ),
-    [memos]
+    [freshMemo]
   );
+
+  const getMemo = useCallback(async () => {
+    const response = await fetch("/api/memo", {
+      method: "get",
+      next: {
+        revalidate: 0,
+      },
+    });
+    return response;
+  }, []);
+
+  useEffect(() => {
+    const fetching = async () => {
+      const res = await getMemo();
+      const { memos } = await res.json();
+      setFreshMemo(memos);
+    };
+
+    fetching();
+    const id = setInterval(fetching, 10000);
+    return () => clearInterval(id);
+  }, []);
 
   useEffect(() => {
     function handleResize() {
@@ -48,10 +80,12 @@ function MemoContainer({ memos }: PropsWithChildren<MemoContainerProps>) {
       ) : (
         <section className={style.container}>
           {isMobile
-            ? memos.map((memo) => <Card key={`memo_${memo.id}`} memo={memo} />)
-            : splitedMemo.map((memos, i) => (
+            ? freshMemo.map((memo) => (
+                <Card key={`memo_${memo.id}`} memo={memo} />
+              ))
+            : splitedMemo.map((freshMemo, i) => (
                 <div key={`spliteed_${i}`} className={style.splited}>
-                  {memos.map((memo) => (
+                  {freshMemo.map((memo) => (
                     <Card key={`memo_${memo.id}`} memo={memo} />
                   ))}
                 </div>

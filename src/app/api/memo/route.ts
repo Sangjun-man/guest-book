@@ -1,5 +1,5 @@
-import { Color, Memo, PrismaClient } from "@prisma/client";
-import type { NextApiRequest, NextApiResponse } from "next";
+import { Color, Memo } from "@prisma/client";
+import prisma from "@/db/index";
 import { NextRequest, NextResponse } from "next/server";
 
 export type RequestData = {
@@ -7,12 +7,6 @@ export type RequestData = {
   content: Memo["content"];
   color: Memo["color"];
 };
-
-type ResponseData = {
-  message: string;
-};
-
-const prisma = new PrismaClient();
 
 export async function POST(req: NextRequest) {
   const data = await req.json();
@@ -37,5 +31,18 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json({
     message: "성공",
+  });
+}
+
+export const dynamic = "force-dynamic";
+
+export async function GET(request: NextRequest, response: NextResponse) {
+  const memos = await prisma.memo.findMany({
+    orderBy: {
+      id: "desc",
+    },
+  });
+  return NextResponse.json({
+    memos,
   });
 }

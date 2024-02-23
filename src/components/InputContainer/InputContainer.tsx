@@ -34,6 +34,7 @@ export default function InputContainer() {
         <div className={style.inputElem}>
           <label>닉네임</label>
           <input
+            max={10}
             onChange={(e) => {
               setNickname(e.target.value);
             }}
@@ -43,6 +44,7 @@ export default function InputContainer() {
         <div className={style.inputElem}>
           <label>내용</label>
           <textarea
+            maxLength={300}
             className={style.textArea}
             placeholder="YAPP 23기에게 하고싶은 말을 남겨주세요. (최대 300자)"
             onChange={(e) => {
