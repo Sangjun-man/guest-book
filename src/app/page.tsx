@@ -6,7 +6,11 @@ import Link from "next/link";
 export default async function Home() {
   const prisma = new PrismaClient();
   const getMemo = async () => {
-    const memos = await prisma.memo.findMany({});
+    const memos = await prisma.memo.findMany({
+      orderBy: {
+        id: "desc",
+      },
+    });
     return {
       props: { memos },
       revalidate: 0,
