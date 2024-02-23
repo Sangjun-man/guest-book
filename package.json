@@ -6,7 +6,7 @@
     "dev": "next dev",
     "start": "next start",
     "lint": "next lint",
-    "vercel-build": "prisma generate && prisma migrate deploy && next build",
+    "build": "next build",
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push",
     "prisma:studio": "prisma studio"

@@ -2,7 +2,7 @@
 "use client";
 
 import { Memo } from "@prisma/client";
-import * as style from "./MemoContainer.module.css";
+import style from "./MemoContainer.module.css";
 import { PropsWithChildren, useEffect, useMemo, useState } from "react";
 import Loader from "../Loader/Loader";
 import Card from "../Card/Card";

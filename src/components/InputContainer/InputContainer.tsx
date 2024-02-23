@@ -1,6 +1,6 @@
 "use client";
 import Bottom from "@/components/Bottom/Bottom";
-import * as style from "./inputContainer.module.css";
+import style from "./inputContainer.module.css";
 import { useCallback, useRef, useState } from "react";
 
 export default function InputContainer() {
