@@ -15,7 +15,7 @@ main {
   overflow-y: scroll;
 }
 
-main::-webkit-scrollbar {
+*::-webkit-scrollbar {
   display: none;
 }
 
