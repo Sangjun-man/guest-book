@@ -53,7 +53,7 @@ function MemoContainer({
     };
 
     fetching();
-    const id = setInterval(fetching, 10000);
+    const id = setInterval(fetching, 3000);
     return () => clearInterval(id);
   }, []);
 

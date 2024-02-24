@@ -7,24 +7,32 @@ import { useRouter } from "next/navigation";
 export default function InputContainer() {
   const [nickname, setNickname] = useState<string>("");
   const [content, setContent] = useState<string>("");
+  const [isSended, setIsSended] = useState<boolean>(false);
   const router = useRouter();
   const saveComment = useCallback(
     async ({
       nickname: n,
       content: c,
+      isSended,
     }: {
       nickname: string;
       content: string;
+      isSended: boolean;
     }) => {
       const nickname = n.trim();
       const content = c.trim();
 
+      if (isSended) {
+        return;
+      }
       if (!nickname) {
         return alert("공백을 제외한 문자를 닉네임에 입력해주세요!");
       }
       if (!content) {
         return alert("공백을 제이한 문자를 코멘트를 입력해주세요!");
       }
+
+      setIsSended(true);
 
       const response = await fetch("/api/memo", {
         method: "POST",
@@ -33,11 +41,14 @@ export default function InputContainer() {
           content,
         }),
       });
+
       const { message } = await response.json();
 
       if (message === "실패") {
         alert("메세지가 저장되지 않았습니다");
+        setIsSended(false);
       } else {
+        setIsSended(true);
         router.push("/");
       }
     },
@@ -73,7 +84,7 @@ export default function InputContainer() {
         <button
           disabled={!(nickname && content)}
           className="button"
-          onClick={() => saveComment({ nickname, content })}
+          onClick={() => saveComment({ nickname, content, isSended })}
         >
           등록하기
         </button>
