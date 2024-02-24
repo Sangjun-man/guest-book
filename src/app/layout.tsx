@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "YAPP 23th 성과공유회 방명록",
-  description: "4개월간 정말 고생 많으셨습니다. 끝이다~~",
+  description: "2월 24일 성과공유회, 4개월간 정말 고생 많으셨어요!!",
   icons: {
     icon: "./icon.png",
   },
